@@ -6,11 +6,10 @@ import './App.css'
 function App() {
   const [isLive, setIsLive] = useState(false)
 
-  return (
-    <div style={{backgroundColor: 'black', height: '100vh', color: 'white'}}>
-      
-    </div>
-  )
+  return (    
+    <div className="app"></div>
+
+    )
 }
 
 export default App

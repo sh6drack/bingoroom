@@ -4,15 +4,17 @@
   padding: 2rem;
   text-align: center;
 }
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+
+.app {
+  background-color: black;
+  height: 100vh;
+  width: 100vw;
+  color: white;
+  position: fixed;
+  top: 0;
+  left: 0;
 }
 
-body {
-  background-color: black;
-}
 .logo {
   height: 6em;
   padding: 1.5em;
