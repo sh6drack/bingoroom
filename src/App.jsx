@@ -52,8 +52,8 @@ function App() {
           animation: ${isLive ? 'flash 1s infinite' : 'none'};
         }
         
-        .live-title {
-          animation: ${isLive ? 'excessiveFlash 0.8s infinite' : 'none'};
+        .main-title {
+          animation: ${isLive ? 'excessiveFlash 0.8s infinite' : 'fadeIn 2s ease-out forwards'};
         }
         
         .fade-in-title {
@@ -110,7 +110,7 @@ function App() {
 
         {/* Main title */}
         <h1 
-          className={`fade-in-title ${isLive ? 'live-title' : ''}`}
+          className="main-title"
           style={{
             fontSize: '8rem',
             fontWeight: '900',
