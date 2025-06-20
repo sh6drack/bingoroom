@@ -2,6 +2,20 @@ import { useState, useEffect } from 'react'
 
 function App() {
   const [isLive, setIsLive] = useState(false)
+  
+  // Admin-only controls via browser console
+  useEffect(() => {
+    // Make toggle function available in console
+    window.toggleLive = () => {
+      setIsLive(prev => !prev)
+      console.log('Live status:', !isLive ? 'LIVE' : 'OFFLINE')
+    }
+    
+    // Clean up on unmount
+    return () => {
+      delete window.toggleLive
+    }
+  }, [isLive])
   const [titleLoaded, setTitleLoaded] = useState(false)
 
   useEffect(() => {
@@ -73,6 +87,15 @@ function App() {
           animation: fadeIn 1.5s ease-out 0.2s forwards;
           opacity: 0;
         }
+        
+        .fade-in-main-title {
+          animation: fadeIn 2.5s ease-out 0.5s forwards;
+          opacity: 0;
+        }
+        
+        .fade-in-main-title.loaded {
+          animation: ${isLive ? 'flash 1s infinite' : 'fadeIn 2.5s ease-out 0.5s forwards'};
+        }
       `}</style>
       
       <div style={{
@@ -136,7 +159,7 @@ function App() {
 
         {/* Main title */}
         <h1 
-          className={`main-title ${titleLoaded ? 'loaded' : ''} ${isLive ? 'live' : ''}`}
+          className={`main-title fade-in-main-title ${titleLoaded ? 'loaded' : ''}`}
           style={{
             fontSize: '8rem',
             fontWeight: '900',
@@ -146,23 +169,6 @@ function App() {
           }}>
           BINGO ROOM<br />RADIO
         </h1>
-
-        {/* Test button (remove this later) */}
-        <button 
-          onClick={() => setIsLive(!isLive)}
-          style={{
-            position: 'absolute',
-            bottom: '30px',
-            left: '30px',
-            padding: '10px 20px',
-            backgroundColor: '#333',
-            color: 'white',
-            border: 'none',
-            borderRadius: '5px',
-            cursor: 'pointer'
-          }}>
-          Toggle Live Mode
-        </button>
       </div>
     </>
   )
