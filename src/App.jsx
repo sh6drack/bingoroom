@@ -25,6 +25,14 @@ function App() {
           100% { opacity: 1; }
         }
         
+        @keyframes excessiveFlash {
+          0% { opacity: 1; }
+          25% { opacity: 0.1; }
+          50% { opacity: 1; }
+          75% { opacity: 0.3; }
+          100% { opacity: 1; }
+        }
+        
         @keyframes fadeIn {
           0% { 
             opacity: 0; 
@@ -38,6 +46,14 @@ function App() {
         
         .live-dot {
           animation: ${isLive ? 'flash 1s infinite' : 'none'};
+        }
+        
+        .live-text {
+          animation: ${isLive ? 'flash 1s infinite' : 'none'};
+        }
+        
+        .live-title {
+          animation: ${isLive ? 'excessiveFlash 0.8s infinite' : 'none'};
         }
         
         .fade-in-title {
@@ -81,18 +97,20 @@ function App() {
               backgroundColor: isLive ? 'red' : '#666'
             }}
           ></div>
-          <span style={{
-            fontSize: '14px',
-            fontWeight: 'bold',
-            letterSpacing: '2px'
-          }}>
+          <span 
+            className="live-text"
+            style={{
+              fontSize: '14px',
+              fontWeight: 'bold',
+              letterSpacing: '2px'
+            }}>
             {isLive ? 'LIVE' : 'OFFLINE'}
           </span>
         </div>
 
         {/* Main title */}
         <h1 
-          className="fade-in-title"
+          className={`fade-in-title ${isLive ? 'live-title' : ''}`}
           style={{
             fontSize: '8rem',
             fontWeight: '900',
@@ -102,6 +120,23 @@ function App() {
           }}>
           BINGO ROOM<br />RADIO
         </h1>
+
+        {/* Test button (remove this later) */}
+        <button 
+          onClick={() => setIsLive(!isLive)}
+          style={{
+            position: 'absolute',
+            bottom: '30px',
+            left: '30px',
+            padding: '10px 20px',
+            backgroundColor: '#333',
+            color: 'white',
+            border: 'none',
+            borderRadius: '5px',
+            cursor: 'pointer'
+          }}>
+          Toggle Live Mode
+        </button>
       </div>
     </>
   )
