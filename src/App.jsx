@@ -1,7 +1,16 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 function App() {
   const [isLive, setIsLive] = useState(false)
+  const [titleLoaded, setTitleLoaded] = useState(false)
+
+  useEffect(() => {
+    // Trigger title fade-in after component mounts
+    const timer = setTimeout(() => {
+      setTitleLoaded(true)
+    }, 100)
+    return () => clearTimeout(timer)
+  }, [])
 
   return (
     <>
@@ -53,7 +62,7 @@ function App() {
         }
         
         .main-title {
-          animation: ${isLive ? 'excessiveFlash 0.8s infinite' : 'fadeIn 2s ease-out forwards'};
+          animation: ${isLive ? 'flash 1s infinite' : 'none'};
         }
         
         .fade-in-title {
@@ -61,7 +70,7 @@ function App() {
         }
         
         .fade-in-live {
-          animation: fadeIn 1.5s ease-out 0.5s forwards;
+          animation: fadeIn 1.5s ease-out 0.2s forwards;
           opacity: 0;
         }
       `}</style>
@@ -77,17 +86,20 @@ function App() {
         color: 'white'
       }}>
         
-        {/* Live indicator dot */}
+        {/* Live indicator - centered at top */}
         <div 
           className="fade-in-live"
           style={{
             position: 'absolute',
             top: '30px',
-            right: '30px',
+            left: '0',
+            right: '0',
             display: 'flex',
             alignItems: 'center',
-            gap: '10px'
+            justifyContent: 'center',
+            gap: '30px'
           }}>
+          {/* Left red dot */}
           <div 
             className="live-dot"
             style={{
@@ -97,20 +109,34 @@ function App() {
               backgroundColor: isLive ? 'red' : '#666'
             }}
           ></div>
+          
+          {/* LIVE/OFFLINE text */}
           <span 
             className="live-text"
             style={{
               fontSize: '14px',
               fontWeight: 'bold',
-              letterSpacing: '2px'
+              letterSpacing: '2px',
+              textAlign: 'center'
             }}>
             {isLive ? 'LIVE' : 'OFFLINE'}
           </span>
+          
+          {/* Right red dot */}
+          <div 
+            className="live-dot"
+            style={{
+              width: '12px',
+              height: '12px',
+              borderRadius: '50%',
+              backgroundColor: isLive ? 'red' : '#666'
+            }}
+          ></div>
         </div>
 
         {/* Main title */}
         <h1 
-          className="main-title"
+          className={`main-title ${titleLoaded ? 'loaded' : ''} ${isLive ? 'live' : ''}`}
           style={{
             fontSize: '8rem',
             fontWeight: '900',
