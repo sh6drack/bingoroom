@@ -25,8 +25,28 @@ function App() {
           100% { opacity: 1; }
         }
         
+        @keyframes fadeIn {
+          0% { 
+            opacity: 0; 
+            transform: translateY(20px);
+          }
+          100% { 
+            opacity: 1; 
+            transform: translateY(0);
+          }
+        }
+        
         .live-dot {
           animation: ${isLive ? 'flash 1s infinite' : 'none'};
+        }
+        
+        .fade-in-title {
+          animation: fadeIn 2s ease-out forwards;
+        }
+        
+        .fade-in-live {
+          animation: fadeIn 1.5s ease-out 0.5s forwards;
+          opacity: 0;
         }
       `}</style>
       
@@ -42,14 +62,16 @@ function App() {
       }}>
         
         {/* Live indicator dot */}
-        <div style={{
-          position: 'absolute',
-          top: '30px',
-          right: '30px',
-          display: 'flex',
-          alignItems: 'center',
-          gap: '10px'
-        }}>
+        <div 
+          className="fade-in-live"
+          style={{
+            position: 'absolute',
+            top: '30px',
+            right: '30px',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '10px'
+          }}>
           <div 
             className="live-dot"
             style={{
@@ -69,13 +91,15 @@ function App() {
         </div>
 
         {/* Main title */}
-        <h1 style={{
-          fontSize: '8rem',
-          fontWeight: '900',
-          margin: '0',
-          textAlign: 'center',
-          lineHeight: '0.9'
-        }}>
+        <h1 
+          className="fade-in-title"
+          style={{
+            fontSize: '8rem',
+            fontWeight: '900',
+            margin: '0',
+            textAlign: 'center',
+            lineHeight: '0.9'
+          }}>
           BINGO ROOM<br />RADIO
         </h1>
       </div>
