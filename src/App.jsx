@@ -6,6 +6,19 @@ function App() {
   return (
     <>
       <style>{`
+        * {
+          margin: 0;
+          padding: 0;
+          box-sizing: border-box;
+        }
+        
+        html, body {
+          margin: 0;
+          padding: 0;
+          height: 100%;
+          overflow: hidden;
+        }
+        
         @keyframes flash {
           0% { opacity: 1; }
           50% { opacity: 0.3; }
