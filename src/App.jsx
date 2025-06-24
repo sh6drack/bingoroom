@@ -133,57 +133,73 @@ function App() {
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
-        fontFamily: 'Helvetica, Arial, sans-serif',
+        fontFamily: '"Courier New", "Monaco", "Menlo", monospace',
         color: 'white'
       }}>
         
-        {/* Live indicator - centered at top */}
-        <div 
-          className="fade-in-live"
-          style={{
+        {/* Minimal offline indicator */}
+        {!isLive && (
+          <div style={{
             position: 'absolute',
-            top: '30px',
-            left: '0',
-            right: '0',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            gap: '30px'
+            top: '20px',
+            right: '20px',
+            fontSize: '10px',
+            opacity: 0.3,
+            letterSpacing: '1px'
           }}>
-          {/* Left red dot */}
+            OFFLINE
+          </div>
+        )}
+        
+        {/* Live indicator - centered at top */}
+        {isLive && (
           <div 
-            className="live-dot"
+            className="fade-in-live"
             style={{
-              width: '12px',
-              height: '12px',
-              borderRadius: '50%',
-              backgroundColor: isLive ? 'red' : '#666'
-            }}
-          ></div>
-          
-          {/* LIVE/OFFLINE text */}
-          <span 
-            className="live-text"
-            style={{
-              fontSize: '14px',
-              fontWeight: 'bold',
-              letterSpacing: '2px',
-              textAlign: 'center'
+              position: 'absolute',
+              top: '30px',
+              left: '0',
+              right: '0',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: '30px'
             }}>
-            {isLive ? 'LIVE' : 'OFFLINE'}
-          </span>
-          
-          {/* Right red dot */}
-          <div 
-            className="live-dot"
-            style={{
-              width: '12px',
-              height: '12px',
-              borderRadius: '50%',
-              backgroundColor: isLive ? 'red' : '#666'
-            }}
-          ></div>
-        </div>
+            {/* Left red dot */}
+            <div 
+              className="live-dot"
+              style={{
+                width: '12px',
+                height: '12px',
+                borderRadius: '50%',
+                backgroundColor: 'red'
+              }}
+            ></div>
+            
+            {/* LIVE text */}
+            <span 
+              className="live-text"
+              style={{
+                fontSize: '14px',
+                fontWeight: 'bold',
+                letterSpacing: '2px',
+                textAlign: 'center'
+              }}>
+              LIVE
+            </span>
+            
+            {/* Right red dot */}
+            <div 
+              className="live-dot"
+              style={{
+                width: '12px',
+                height: '12px',
+                borderRadius: '50%',
+                backgroundColor: 'red'
+              }}
+            ></div>
+          </div>
+        )}
 
         {/* Main title */}
         <h1 
