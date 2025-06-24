@@ -85,6 +85,12 @@ function App() {
           }
         }
         
+        @keyframes offlineFlash {
+          0% { opacity: 0; }
+          50% { opacity: 1; }
+          100% { opacity: 0; }
+        }
+        
         .live-dot {
           animation: ${isLive ? 'flash 1s infinite' : 'none'};
         }
@@ -162,8 +168,8 @@ function App() {
             top: '20px',
             right: '20px',
             fontSize: '10px',
-            opacity: 0.3,
-            letterSpacing: '1px'
+            letterSpacing: '1px',
+            animation: 'offlineFlash 1.5s infinite'
           }}>
             OFFLINE
           </div>
