@@ -96,6 +96,34 @@ function App() {
         .fade-in-main-title.loaded {
           animation: ${isLive ? 'flash 1s infinite' : 'fadeIn 2.5s ease-out 0.5s forwards'};
         }
+        
+        /* Mobile responsive font sizes */
+        @media (max-width: 768px) {
+          .main-title {
+            font-size: 3rem !important;
+          }
+          .live-text {
+            font-size: 12px !important;
+          }
+        }
+        
+        @media (max-width: 480px) {
+          .main-title {
+            font-size: 2.5rem !important;
+          }
+          .live-text {
+            font-size: 10px !important;
+          }
+        }
+        
+        @media (max-width: 320px) {
+          .main-title {
+            font-size: 2rem !important;
+          }
+          .live-text {
+            font-size: 9px !important;
+          }
+        }
       `}</style>
       
       <div style={{
