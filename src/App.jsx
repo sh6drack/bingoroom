@@ -67,6 +67,24 @@ function App() {
           }
         }
         
+        @keyframes subtleFloat {
+          0% { 
+            transform: translate(0, 0) rotate(0deg);
+          }
+          25% { 
+            transform: translate(2px, -2px) rotate(0.5deg);
+          }
+          50% { 
+            transform: translate(0, -3px) rotate(0deg);
+          }
+          75% { 
+            transform: translate(-2px, -1px) rotate(-0.5deg);
+          }
+          100% { 
+            transform: translate(0, 0) rotate(0deg);
+          }
+        }
+        
         .live-dot {
           animation: ${isLive ? 'flash 1s infinite' : 'none'};
         }
@@ -76,7 +94,7 @@ function App() {
         }
         
         .main-title {
-          animation: ${isLive ? 'flash 1s infinite' : 'none'};
+          animation: ${isLive ? 'flash 1s infinite' : 'subtleFloat 8s ease-in-out infinite'};
         }
         
         .fade-in-title {
@@ -133,7 +151,7 @@ function App() {
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
-        fontFamily: '"Courier New", "Monaco", "Menlo", monospace',
+        fontFamily: 'Helvetica, Arial, sans-serif',
         color: 'white'
       }}>
         
