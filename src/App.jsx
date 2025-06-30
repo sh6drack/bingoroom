@@ -91,6 +91,12 @@ function App() {
           100% { opacity: 0; }
         }
         
+        @keyframes aboutFlash {
+          0% { opacity: 0.7; }
+          50% { opacity: 1; }
+          100% { opacity: 0.7; }
+        }
+        
         .live-dot {
           animation: ${isLive ? 'flash 1s infinite' : 'none'};
         }
@@ -235,8 +241,24 @@ function App() {
             textAlign: 'center',
             lineHeight: '0.9'
           }}>
-          BINGO ROOM<br />RADIO
+          BINGO ROOM
         </h1>
+        
+        {/* About section - bottom left */}
+        <div style={{
+          position: 'absolute',
+          bottom: '20px',
+          left: '20px',
+          fontSize: '10px',
+          letterSpacing: '1px',
+          backgroundColor: 'rgba(255, 255, 0, 0.7)',
+          color: 'black',
+          padding: '4px 8px',
+          animation: 'aboutFlash 1.5s infinite',
+          fontWeight: 'bold'
+        }}>
+          ABOUT
+        </div>
       </div>
     </>
   )
