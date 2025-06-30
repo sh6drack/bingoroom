@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 
 function App() {
   const [isLive, setIsLive] = useState(false)
+  const [currentPage, setCurrentPage] = useState('home')
   
   // Admin-only controls via browser console
   useEffect(() => {
@@ -25,6 +26,120 @@ function App() {
     }, 100)
     return () => clearTimeout(timer)
   }, [])
+
+  // About page component
+  const AboutPage = () => (
+    <>
+      <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+        
+        * {
+          margin: 0;
+          padding: 0;
+          box-sizing: border-box;
+        }
+        
+        html, body {
+          margin: 0;
+          padding: 0;
+          height: 100%;
+          overflow: hidden;
+        }
+      `}</style>
+      <div style={{
+        backgroundColor: 'black',
+        height: '100vh',
+        position: 'relative',
+        fontFamily: 'Helvetica, Arial, sans-serif',
+        color: 'white'
+      }}>
+      {/* Left triangle back button */}
+      <div 
+        onClick={() => setCurrentPage('home')}
+        style={{
+          position: 'absolute',
+          top: '20px',
+          left: '20px',
+          width: '0',
+          height: '0',
+          borderTop: '4px solid transparent',
+          borderBottom: '4px solid transparent',
+          borderRight: '6px solid white',
+          cursor: 'pointer',
+          transition: 'all 0.2s ease'
+        }}
+        onMouseEnter={(e) => {
+          e.target.style.borderRightColor = 'rgba(255, 255, 255, 0.7)'
+        }}
+        onMouseLeave={(e) => {
+          e.target.style.borderRightColor = 'white'
+        }}>
+      </div>
+      
+      {/* Content area for text - positioned at middle-top right */}
+      <div style={{
+        position: 'absolute',
+        top: '25%',
+        left: '62.5%',
+        transform: 'translateX(-50%)',
+        maxWidth: '480px',
+        textAlign: 'left',
+        lineHeight: '1.5',
+        fontFamily: 'Helvetica, Arial, sans-serif',
+        fontSize: '13px',
+        fontWeight: '400'
+      }}>
+        <p style={{ 
+          margin: '0', 
+          color: 'white'
+        }}>
+          This radio presents the songs that happened to make it through today.
+          <br /><br />
+          Radio used to decide what was worth hearing. Now we can dig deeper. We can find the weird stuff, the local stuff, the sets that make you not want to blow your brains out from hearing the 67th rerun of track that's getting promoted.
+          <br /><br />
+          That's what I think this stuff is about. Playing what moves us, not what's supposed to move you. Turn it up or turn it off. Both are valid.
+          <br /><br />
+          What sounds profound at 3am might sound ridiculous at noon. Both observations are correct. A love song, a field recording of traffic, someone's first attempt at making beats on their laptop - they all exist in the same space.
+          <br /><br />
+          Your taste isn't universal. Neither is mine. But something got played today anyway.
+        </p>
+      </div>
+      
+      {/* Signature at bottom center */}
+      <a 
+        href="https://shadrackannor.com"
+        target="_blank"
+        rel="noopener noreferrer"
+        style={{
+          position: 'absolute',
+          bottom: '20px',
+          left: '50%',
+          transform: 'translateX(-50%)',
+          fontFamily: 'Helvetica, Arial, sans-serif',
+          fontSize: '9px',
+          color: 'rgba(255, 165, 0, 0.6)',
+          letterSpacing: '0.3px',
+          fontWeight: '300',
+          textDecoration: 'none',
+          cursor: 'pointer',
+          transition: 'opacity 0.2s ease'
+        }}
+        onMouseEnter={(e) => {
+          e.target.style.opacity = '0.8'
+        }}
+        onMouseLeave={(e) => {
+          e.target.style.opacity = '0.6'
+        }}>
+        by shadrack annor
+      </a>
+    </div>
+    </>
+  )
+
+  // Render about page if currentPage is 'about'
+  if (currentPage === 'about') {
+    return <AboutPage />
+  }
 
   return (
     <>
@@ -95,6 +210,10 @@ function App() {
           0% { opacity: 0.7; }
           50% { opacity: 1; }
           100% { opacity: 0.7; }
+        }
+        
+        .about-button {
+          cursor: pointer;
         }
         
         .live-dot {
@@ -245,18 +364,19 @@ function App() {
         </h1>
         
         {/* About section - bottom left */}
-        <div style={{
-          position: 'absolute',
-          bottom: '20px',
-          left: '20px',
-          fontSize: '10px',
-          letterSpacing: '1px',
-          backgroundColor: 'rgba(255, 255, 0, 0.7)',
-          color: 'black',
-          padding: '4px 8px',
-          animation: 'aboutFlash 1.5s infinite',
-          fontWeight: 'bold'
-        }}>
+        <div 
+          className="about-button"
+          onClick={() => setCurrentPage('about')}
+          style={{
+            position: 'absolute',
+            bottom: '20px',
+            left: '20px',
+            fontSize: '12px',
+            letterSpacing: '1px',
+            color: 'rgba(255, 165, 0, 0.7)',
+            fontWeight: 'bold',
+            animation: 'offlineFlash 1.5s infinite'
+          }}>
           ABOUT
         </div>
       </div>
