@@ -1,0 +1,52 @@
+# bingo room radio - requirements
+
+## system requirements
+- node.js 18+ 
+- npm 9+
+- modern web browser with es6 support
+
+## dependencies (auto-installed with npm install)
+
+### runtime dependencies
+- react ^19.1.0
+- react-dom ^19.1.0
+
+### development dependencies  
+- vite ^6.3.5 (build tool)
+- @vitejs/plugin-react ^4.4.1 (react support)
+- eslint ^9.25.0 (code linting)
+- eslint-plugin-react-hooks ^5.2.0
+- eslint-plugin-react-refresh ^0.4.19
+- @types/react ^19.1.2 (typescript definitions)
+- @types/react-dom ^19.1.2
+- @eslint/js ^9.25.0
+- globals ^16.0.0
+
+## browser compatibility
+- chrome 88+
+- firefox 85+
+- safari 14+
+- edge 88+
+
+## features used
+- css keyframe animations
+- sessionStorage api
+- keyboard event listeners
+- css transforms and positioning
+- responsive viewport units
+
+## optional enhancements
+- web fonts (akzidenz-grotesk fallback to helvetica)
+- favicon.svg support
+- touch/mobile gesture support
+
+## development tools
+- vite dev server with hot reload
+- react fast refresh
+- eslint code quality checks
+
+## production build
+- static file output
+- asset optimization
+- css/js minification
+- compatible with any static hosting service
