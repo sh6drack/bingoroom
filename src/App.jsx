@@ -95,7 +95,7 @@ function App() {
         }}>
           This radio presents the songs that happened to make it through today.
           <br /><br />
-          Radio used to decide what was worth hearing. Now we can dig deeper. We can find the weird stuff, the local stuff, the sets that make you not want to blow your brains out from hearing the 67th rerun of track that's getting promoted.
+          Radio used to decide what was worth hearing. Now we can dig deeper. We can find the weird stuff, the local stuff, the sets that make you not want to blow your brains out from hearing the 67th rerun of a track that's getting promoted.
           <br /><br />
           That's what I think this stuff is about. Playing what moves us, not what's supposed to move you. Turn it up or turn it off. Both are valid.
           <br /><br />
