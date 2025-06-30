@@ -28,7 +28,17 @@ function App() {
   }, [])
 
   // About page component
-  const AboutPage = () => (
+  const AboutPage = () => {
+    const [aboutLoaded, setAboutLoaded] = useState(false)
+    
+    useEffect(() => {
+      const timer = setTimeout(() => {
+        setAboutLoaded(true)
+      }, 100)
+      return () => clearTimeout(timer)
+    }, [])
+    
+    return (
     <>
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
@@ -42,17 +52,101 @@ function App() {
         html, body {
           margin: 0;
           padding: 0;
-          height: 100%;
-          overflow: hidden;
+          min-height: 100%;
+          overflow: auto;
+        }
+        
+        @keyframes fadeInUp {
+          0% { 
+            opacity: 0; 
+            transform: translateX(-50%) translateY(20px);
+          }
+          100% { 
+            opacity: 1; 
+            transform: translateX(-50%) translateY(0);
+          }
+        }
+        
+        @keyframes offlineFlash {
+          0% { opacity: 0; }
+          50% { opacity: 1; }
+          100% { opacity: 0; }
+        }
+        
+        .about-fade-in {
+          animation: fadeInUp 1.5s ease-out 0.2s forwards;
+          opacity: 0;
+        }
+        
+        .about-fade-in-content {
+          animation: fadeInUp 2.5s ease-out 0.5s forwards;
+          opacity: 0;
+        }
+        
+        .about-fade-in-signature {
+          animation: fadeInUp 1.5s ease-out 0.2s forwards;
+          opacity: 0;
         }
       `}</style>
       <div style={{
         backgroundColor: 'black',
-        height: '100vh',
+        minHeight: '100vh',
         position: 'relative',
-        fontFamily: 'Helvetica, Arial, sans-serif',
-        color: 'white'
+        fontFamily: 'Akzidenz-Grotesk, Helvetica, Arial, sans-serif',
+        color: 'white',
+        paddingBottom: '60px'
       }}>
+      {/* Live indicator for about page - top right */}
+      {isLive && (
+        <div 
+          className="about-fade-in"
+          style={{
+            position: 'absolute',
+            top: '20px',
+            right: '20px',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '8px'
+          }}>
+          {/* LIVE text */}
+          <span 
+            style={{
+              fontSize: '10px',
+              letterSpacing: '1px',
+              animation: 'offlineFlash 1.5s infinite'
+            }}>
+            LIVE
+          </span>
+          
+          {/* Red dot */}
+          <div 
+            style={{
+              width: '8px',
+              height: '8px',
+              borderRadius: '50%',
+              backgroundColor: 'red',
+              animation: 'offlineFlash 1.5s infinite'
+            }}>
+          </div>
+        </div>
+      )}
+      
+      {/* Offline indicator for about page */}
+      {!isLive && (
+        <div 
+          className="about-fade-in"
+          style={{
+            position: 'absolute',
+            top: '20px',
+            right: '20px',
+            fontSize: '10px',
+            letterSpacing: '1px',
+            animation: 'offlineFlash 1.5s infinite'
+          }}>
+          OFFLINE
+        </div>
+      )}
+      
       {/* Left triangle back button */}
       <div 
         onClick={() => setCurrentPage('home')}
@@ -76,19 +170,21 @@ function App() {
         }}>
       </div>
       
-      {/* Content area for text - positioned at middle-top right */}
-      <div style={{
-        position: 'absolute',
-        top: '25%',
-        left: '62.5%',
-        transform: 'translateX(-50%)',
-        maxWidth: '480px',
-        textAlign: 'left',
-        lineHeight: '1.5',
-        fontFamily: 'Helvetica, Arial, sans-serif',
-        fontSize: '13px',
-        fontWeight: '400'
-      }}>
+      {/* Content area for text - positioned at center */}
+      <div 
+        className="about-fade-in-content"
+        style={{
+          position: 'absolute',
+          top: '25%',
+          left: '62.5%',
+          transform: 'translateX(-50%) translateY(20px)',
+          maxWidth: '480px',
+          textAlign: 'left',
+          lineHeight: '1.5',
+          fontFamily: 'Akzidenz-Grotesk, Helvetica, Arial, sans-serif',
+          fontSize: '13px',
+          fontWeight: '400'
+        }}>
         <p style={{ 
           margin: '0', 
           color: 'white'
@@ -105,36 +201,37 @@ function App() {
         </p>
       </div>
       
-      {/* Signature at bottom center */}
+      {/* Signature at bottom right */}
       <a 
         href="https://shadrackannor.com"
         target="_blank"
         rel="noopener noreferrer"
+        className="about-fade-in-signature"
         style={{
           position: 'absolute',
           bottom: '20px',
-          left: '50%',
-          transform: 'translateX(-50%)',
+          right: '20px',
           fontFamily: 'Helvetica, Arial, sans-serif',
-          fontSize: '9px',
-          color: 'rgba(255, 165, 0, 0.6)',
-          letterSpacing: '0.3px',
-          fontWeight: '300',
+          fontSize: '12px',
+          color: 'rgba(255, 165, 0, 0.4)',
+          letterSpacing: '1px',
+          fontWeight: 'normal',
           textDecoration: 'none',
           cursor: 'pointer',
           transition: 'opacity 0.2s ease'
         }}
         onMouseEnter={(e) => {
-          e.target.style.opacity = '0.8'
+          e.target.style.opacity = '0.6'
         }}
         onMouseLeave={(e) => {
-          e.target.style.opacity = '0.6'
+          e.target.style.opacity = '0.4'
         }}>
         by shadrack annor
       </a>
     </div>
     </>
-  )
+    )
+  }
 
   // Render about page if currentPage is 'about'
   if (currentPage === 'about') {
@@ -217,15 +314,15 @@ function App() {
         }
         
         .live-dot {
-          animation: ${isLive ? 'flash 1s infinite' : 'none'};
+          animation: ${isLive ? 'offlineFlash 1.5s infinite' : 'none'};
         }
         
         .live-text {
-          animation: ${isLive ? 'flash 1s infinite' : 'none'};
+          animation: ${isLive ? 'offlineFlash 1.5s infinite' : 'none'};
         }
         
         .main-title {
-          animation: ${isLive ? 'flash 1s infinite' : 'subtleFloat 8s ease-in-out infinite'};
+          animation: subtleFloat 8s ease-in-out infinite;
         }
         
         .fade-in-title {
@@ -243,7 +340,7 @@ function App() {
         }
         
         .fade-in-main-title.loaded {
-          animation: ${isLive ? 'flash 1s infinite' : 'fadeIn 2.5s ease-out 0.5s forwards'};
+          animation: fadeIn 2.5s ease-out 0.5s forwards;
         }
         
         /* Mobile responsive font sizes */
@@ -282,7 +379,7 @@ function App() {
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
-        fontFamily: 'Helvetica, Arial, sans-serif',
+        fontFamily: 'Akzidenz-Grotesk, Helvetica, Arial, sans-serif',
         color: 'white'
       }}>
         
@@ -300,49 +397,34 @@ function App() {
           </div>
         )}
         
-        {/* Live indicator - centered at top */}
+        {/* Live indicator - top right like offline */}
         {isLive && (
           <div 
             className="fade-in-live"
             style={{
               position: 'absolute',
-              top: '30px',
-              left: '0',
-              right: '0',
+              top: '20px',
+              right: '20px',
               display: 'flex',
               alignItems: 'center',
-              justifyContent: 'center',
-              gap: '30px'
+              gap: '8px'
             }}>
-            {/* Left red dot */}
-            <div 
-              className="live-dot"
-              style={{
-                width: '12px',
-                height: '12px',
-                borderRadius: '50%',
-                backgroundColor: 'red'
-              }}
-            ></div>
-            
             {/* LIVE text */}
             <span 
               className="live-text"
               style={{
-                fontSize: '14px',
-                fontWeight: 'bold',
-                letterSpacing: '2px',
-                textAlign: 'center'
+                fontSize: '10px',
+                letterSpacing: '1px'
               }}>
               LIVE
             </span>
             
-            {/* Right red dot */}
+            {/* Red dot */}
             <div 
               className="live-dot"
               style={{
-                width: '12px',
-                height: '12px',
+                width: '8px',
+                height: '8px',
                 borderRadius: '50%',
                 backgroundColor: 'red'
               }}
@@ -350,35 +432,21 @@ function App() {
           </div>
         )}
 
-        {/* Main title */}
+        {/* Main title - clickable link to about */}
         <h1 
           className={`main-title fade-in-main-title ${titleLoaded ? 'loaded' : ''}`}
+          onClick={() => setCurrentPage('about')}
           style={{
             fontSize: '8rem',
             fontWeight: '900',
             margin: '0',
             textAlign: 'center',
-            lineHeight: '0.9'
+            lineHeight: '0.9',
+            cursor: 'pointer'
           }}>
           BINGO ROOM
         </h1>
         
-        {/* About section - bottom left */}
-        <div 
-          className="about-button"
-          onClick={() => setCurrentPage('about')}
-          style={{
-            position: 'absolute',
-            bottom: '20px',
-            left: '20px',
-            fontSize: '12px',
-            letterSpacing: '1px',
-            color: 'rgba(255, 165, 0, 0.7)',
-            fontWeight: 'bold',
-            animation: 'offlineFlash 1.5s infinite'
-          }}>
-          ABOUT
-        </div>
       </div>
     </>
   )
