@@ -67,13 +67,16 @@ function App() {
         /* Mobile styles for about page */
         @media (max-width: 768px) {
           .about-content {
-            left: 50% !important;
-            top: 20% !important;
-            padding: 0 20px !important;
-            max-width: calc(100vw - 40px) !important;
+            left: 35% !important;
+            right: auto !important;
+            top: 35% !important;
+            padding: 0 !important;
+            max-width: 300px !important;
             max-height: calc(100vh - 160px) !important;
             overflow-y: auto !important;
             font-size: 12px !important;
+            text-align: left !important;
+            transform: none !important;
           }
           
           .about-signature {
@@ -87,11 +90,15 @@ function App() {
         
         @media (max-width: 480px) {
           .about-content {
-            top: 15% !important;
-            padding: 0 15px !important;
-            max-width: calc(100vw - 30px) !important;
+            top: 30% !important;
+            left: 25% !important;
+            right: auto !important;
+            padding: 0 !important;
+            max-width: 280px !important;
             max-height: calc(100vh - 120px) !important;
             font-size: 11px !important;
+            text-align: left !important;
+            transform: none !important;
           }
           
           .about-signature {
@@ -363,7 +370,8 @@ function App() {
           .fishing-animation {
             width: 250px !important;
             height: 150px !important;
-            top: 10% !important;
+            top: 25% !important;
+            left: 40% !important;
           }
           
           .fishing-animation svg {
@@ -381,7 +389,7 @@ function App() {
           .fishing-animation {
             width: 200px !important;
             height: 120px !important;
-            top: 8% !important;
+            top: 23% !important;
           }
           
           .fishing-animation svg {
@@ -399,7 +407,7 @@ function App() {
           .fishing-animation {
             width: 180px !important;
             height: 100px !important;
-            top: 6% !important;
+            top: 20% !important;
           }
           
           .fishing-animation svg {
