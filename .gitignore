@@ -23,4 +23,9 @@ dist-ssr
 *.sln
 *.sw?
 
+*.github
+
 README-personal.md
+.claude
+
+.vscode

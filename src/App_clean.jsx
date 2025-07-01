@@ -293,14 +293,6 @@ function App() {
           to { stroke-dashoffset: 0; }
         }
         
-        @keyframes rotate3D {
-          0% { transform: rotateY(0deg) rotateX(0deg); }
-          25% { transform: rotateY(90deg) rotateX(5deg); }
-          50% { transform: rotateY(180deg) rotateX(0deg); }
-          75% { transform: rotateY(270deg) rotateX(-5deg); }
-          100% { transform: rotateY(360deg) rotateX(0deg); }
-        }
-        
         .main-title {
           animation: subtleFloat 8s ease-in-out infinite;
         }
@@ -393,7 +385,7 @@ function App() {
           </div>
         )}
 
-        {/* CSS Animated Fishing Drawing - White on Black */}
+        {/* CSS Animated Paper Fishing Drawing */}
         <div
           style={{
             position: 'absolute',
@@ -402,26 +394,21 @@ function App() {
             transform: 'translateX(-50%)',
             width: '300px',
             height: '200px',
+            backgroundColor: 'rgba(255, 255, 255, 0.95)',
+            borderRadius: '8px',
+            padding: '10px',
+            boxShadow: '0 4px 12px rgba(0, 0, 0, 0.3)',
             zIndex: 10,
             animation: 'fadeIn 2s ease-out 0.5s forwards',
             opacity: 0
           }}
         >
           <svg width="280" height="180" viewBox="0 0 280 180" style={{ overflow: 'visible' }}>
-            {/* Gradients for 3D ball */}
-            <defs>
-              <radialGradient id="ballGradient" cx="0.3" cy="0.3">
-                <stop offset="0%" stopColor="#ffffff" />
-                <stop offset="30%" stopColor="#f0f0f0" />
-                <stop offset="70%" stopColor="#e0e0e0" />
-                <stop offset="100%" stopColor="#c0c0c0" />
-              </radialGradient>
-            </defs>
             {/* Boat */}
             <path
               d="M 40 110 Q 70 120 140 120 Q 210 120 240 110 L 230 130 Q 140 135 50 130 Z"
               fill="none"
-              stroke="white"
+              stroke="#333"
               strokeWidth="2"
               strokeDasharray="300"
               strokeDashoffset="300"
@@ -432,7 +419,7 @@ function App() {
             <path
               d="M 0 130 Q 20 135 40 130 Q 60 125 80 130 Q 100 135 120 130 Q 140 125 160 130 Q 180 135 200 130 Q 220 125 240 130 Q 260 135 280 130"
               fill="none"
-              stroke="rgba(255, 255, 255, 0.7)"
+              stroke="#666"
               strokeWidth="1"
               strokeDasharray="400"
               strokeDashoffset="400"
@@ -445,62 +432,44 @@ function App() {
               cy="70"
               r="10"
               fill="none"
-              stroke="white"
+              stroke="#333"
               strokeWidth="2"
               style={{ animation: 'fadeIn 0.5s ease-out 2.5s forwards', opacity: 0 }}
             />
             
             {/* Eyes and mouth */}
-            <circle cx="117" cy="68" r="1" fill="white" style={{ animation: 'fadeIn 0.5s ease-out 3s forwards', opacity: 0 }} />
-            <circle cx="123" cy="68" r="1" fill="white" style={{ animation: 'fadeIn 0.5s ease-out 3.1s forwards', opacity: 0 }} />
-            <path d="M 117 73 Q 120 75 123 73" fill="none" stroke="white" strokeWidth="1" style={{ animation: 'fadeIn 0.5s ease-out 3.2s forwards', opacity: 0 }} />
+            <circle cx="117" cy="68" r="1" fill="#333" style={{ animation: 'fadeIn 0.5s ease-out 3s forwards', opacity: 0 }} />
+            <circle cx="123" cy="68" r="1" fill="#333" style={{ animation: 'fadeIn 0.5s ease-out 3.1s forwards', opacity: 0 }} />
+            <path d="M 117 73 Q 120 75 123 73" fill="none" stroke="#333" strokeWidth="1" style={{ animation: 'fadeIn 0.5s ease-out 3.2s forwards', opacity: 0 }} />
             
             {/* Body */}
-            <line x1="120" y1="80" x2="120" y2="110" stroke="white" strokeWidth="2" 
+            <line x1="120" y1="80" x2="120" y2="110" stroke="#333" strokeWidth="2" 
               strokeDasharray="30" strokeDashoffset="30" style={{ animation: 'drawLine 1s ease-out 3.5s forwards' }} />
             
             {/* Arms */}
-            <line x1="120" y1="90" x2="105" y2="95" stroke="white" strokeWidth="2"
+            <line x1="120" y1="90" x2="105" y2="95" stroke="#333" strokeWidth="2"
               strokeDasharray="20" strokeDashoffset="20" style={{ animation: 'drawLine 0.8s ease-out 4s forwards' }} />
-            <line x1="120" y1="90" x2="160" y2="85" stroke="white" strokeWidth="2"
+            <line x1="120" y1="90" x2="160" y2="85" stroke="#333" strokeWidth="2"
               strokeDasharray="40" strokeDashoffset="40" style={{ animation: 'drawLine 0.8s ease-out 4.2s forwards' }} />
             
             {/* Legs */}
-            <line x1="120" y1="110" x2="115" y2="125" stroke="white" strokeWidth="2"
+            <line x1="120" y1="110" x2="115" y2="125" stroke="#333" strokeWidth="2"
               strokeDasharray="15" strokeDashoffset="15" style={{ animation: 'drawLine 0.8s ease-out 4.5s forwards' }} />
-            <line x1="120" y1="110" x2="125" y2="125" stroke="white" strokeWidth="2"
+            <line x1="120" y1="110" x2="125" y2="125" stroke="#333" strokeWidth="2"
               strokeDasharray="15" strokeDashoffset="15" style={{ animation: 'drawLine 0.8s ease-out 4.7s forwards' }} />
             
             {/* Fishing rod */}
-            <line x1="160" y1="85" x2="185" y2="55" stroke="rgba(139, 69, 19, 1)" strokeWidth="3"
+            <line x1="160" y1="85" x2="185" y2="55" stroke="#654321" strokeWidth="3"
               strokeDasharray="35" strokeDashoffset="35" style={{ animation: 'drawLine 1s ease-out 5s forwards' }} />
             
             {/* Fishing line */}
-            <path d="M 185 55 Q 195 75 205 95 Q 215 115 225 130" fill="none" stroke="white" strokeWidth="1"
+            <path d="M 185 55 Q 195 75 205 95 Q 215 115 225 130" fill="none" stroke="#333" strokeWidth="1"
               strokeDasharray="80" strokeDashoffset="80" style={{ animation: 'drawLine 1.5s ease-out 5.5s forwards' }} />
             
-            {/* 3D Bingo Ball */}
+            {/* Bingo ball */}
             <g style={{ animation: 'fadeIn 1s ease-out 6.5s forwards, subtleFloat 3s ease-in-out 7s infinite', opacity: 0 }}>
-              {/* Ball shadow */}
-              <ellipse cx="228" cy="138" rx="12" ry="4" fill="rgba(0, 0, 0, 0.3)" />
-              
-              {/* Ball base */}
-              <circle cx="225" cy="130" r="12" fill="url(#ballGradient)" stroke="rgba(255, 255, 255, 0.3)" strokeWidth="0.5" />
-              
-              {/* Ball highlight */}
-              <circle cx="221" cy="126" r="3" fill="rgba(255, 255, 255, 0.8)" />
-              
-              {/* Inner circle for number */}
-              <circle cx="225" cy="130" r="7" fill="rgba(255, 255, 255, 0.95)" stroke="rgba(200, 200, 200, 0.5)" strokeWidth="0.5" />
-              
-              {/* Number */}
-              <text x="225" y="134" textAnchor="middle" fontSize="8" fill="#333" fontWeight="bold" fontFamily="Arial, sans-serif">B7</text>
-              
-              {/* 3D rotating element */}
-              <g style={{ animation: 'rotate3D 8s linear infinite', transformOrigin: '225px 130px' }}>
-                <path d="M 213 130 Q 225 125 237 130" stroke="rgba(200, 200, 200, 0.3)" strokeWidth="0.5" fill="none" />
-                <path d="M 213 130 Q 225 135 237 130" stroke="rgba(150, 150, 150, 0.2)" strokeWidth="0.5" fill="none" />
-              </g>
+              <circle cx="225" cy="130" r="8" fill="white" stroke="#333" strokeWidth="1" />
+              <text x="225" y="133" textAnchor="middle" fontSize="6" fill="#333" fontWeight="bold">B7</text>
             </g>
           </svg>
         </div>
