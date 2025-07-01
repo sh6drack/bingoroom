@@ -50,6 +50,7 @@ function App() {
           padding: 0;
           min-height: 100%;
           overflow: auto;
+          -webkit-overflow-scrolling: touch;
         }
         
         @keyframes fadeInUp {
@@ -60,6 +61,43 @@ function App() {
           100% { 
             opacity: 1; 
             transform: translateX(-50%) translateY(0);
+          }
+        }
+        
+        /* Mobile styles for about page */
+        @media (max-width: 768px) {
+          .about-content {
+            left: 50% !important;
+            top: 20% !important;
+            padding: 0 20px !important;
+            max-width: calc(100vw - 40px) !important;
+            max-height: calc(100vh - 160px) !important;
+            overflow-y: auto !important;
+            font-size: 12px !important;
+          }
+          
+          .about-signature {
+            position: fixed !important;
+            bottom: 10px !important;
+            right: 10px !important;
+            font-size: 10px !important;
+            z-index: 1000 !important;
+          }
+        }
+        
+        @media (max-width: 480px) {
+          .about-content {
+            top: 15% !important;
+            padding: 0 15px !important;
+            max-width: calc(100vw - 30px) !important;
+            max-height: calc(100vh - 120px) !important;
+            font-size: 11px !important;
+          }
+          
+          .about-signature {
+            bottom: 8px !important;
+            right: 8px !important;
+            font-size: 9px !important;
           }
         }
         
@@ -87,10 +125,12 @@ function App() {
       <div style={{
         backgroundColor: 'black',
         minHeight: '100vh',
+        width: '100vw',
         position: 'relative',
         fontFamily: 'Akzidenz-Grotesk, Helvetica, Arial, sans-serif',
         color: 'white',
-        paddingBottom: '60px'
+        paddingBottom: '60px',
+        overflow: 'hidden'
       }}>
       {/* Live indicator for about page - top right */}
       {isLive && (
@@ -166,7 +206,7 @@ function App() {
       
       {/* Content area for text - positioned at center */}
       <div 
-        className="about-fade-in-content"
+        className="about-fade-in-content about-content"
         style={{
           position: 'absolute',
           top: '25%',
@@ -200,7 +240,7 @@ function App() {
         href="https://shadrackannor.com"
         target="_blank"
         rel="noopener noreferrer"
-        className="about-fade-in-signature"
+        className="about-fade-in-signature about-signature"
         style={{
           position: 'absolute',
           bottom: '20px',
@@ -314,22 +354,57 @@ function App() {
           animation: fadeIn 2.5s ease-out 0.5s forwards;
         }
         
-        /* Mobile responsive font sizes */
+        /* Mobile responsive styles */
         @media (max-width: 768px) {
           .main-title {
             font-size: 3rem !important;
+          }
+          
+          .fishing-animation {
+            width: 250px !important;
+            height: 150px !important;
+            top: 10% !important;
+          }
+          
+          .fishing-animation svg {
+            width: 220px !important;
+            height: 140px !important;
           }
         }
         
         @media (max-width: 480px) {
           .main-title {
             font-size: 2.5rem !important;
+            margin-top: 60px !important;
+          }
+          
+          .fishing-animation {
+            width: 200px !important;
+            height: 120px !important;
+            top: 8% !important;
+          }
+          
+          .fishing-animation svg {
+            width: 180px !important;
+            height: 100px !important;
           }
         }
         
         @media (max-width: 320px) {
           .main-title {
             font-size: 2rem !important;
+            margin-top: 50px !important;
+          }
+          
+          .fishing-animation {
+            width: 180px !important;
+            height: 100px !important;
+            top: 6% !important;
+          }
+          
+          .fishing-animation svg {
+            width: 160px !important;
+            height: 90px !important;
           }
         }
       `}</style>
@@ -337,13 +412,15 @@ function App() {
       <div style={{
         backgroundColor: 'black',
         height: '100vh',
+        width: '100vw',
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
         fontFamily: 'Akzidenz-Grotesk, Helvetica, Arial, sans-serif',
         color: 'white',
-        position: 'relative'
+        position: 'relative',
+        overflow: 'hidden'
       }}>
         
         {/* Minimal offline indicator */}
@@ -395,6 +472,7 @@ function App() {
 
         {/* CSS Animated Fishing Drawing - White on Black */}
         <div
+          className="fishing-animation"
           style={{
             position: 'absolute',
             top: '15%',
@@ -407,7 +485,7 @@ function App() {
             opacity: 0
           }}
         >
-          <svg width="280" height="180" viewBox="0 0 280 180" style={{ overflow: 'visible' }}>
+          <svg width="280" height="180" viewBox="0 0 280 180" style={{ overflow: 'visible', maxWidth: '100%', height: 'auto' }}>
             {/* Gradients for 3D ball */}
             <defs>
               <radialGradient id="ballGradient" cx="0.3" cy="0.3">
